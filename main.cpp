@@ -22,7 +22,7 @@ typedef struct customer {
     vector<items> item_collection;
 } Customer;
 
-void read_customer_data(ifstream &filein, Customer &cs) {
+void get_information_customer(ifstream &filein, Customer &cs) {
     getline(filein, cs.cid, ',');
     getline(filein, cs.name, ',');
     getline(filein, cs.address, ',');
@@ -33,25 +33,25 @@ void read_customer_data(ifstream &filein, Customer &cs) {
     getline(filein, cs.type);
 }
 
-void read_items_data(ifstream &filein, Item &it) {
+void get_information_items_in_customer(ifstream &filein, Item &it) {
     getline(filein, it.i_id, '-');
     getline(filein, it.i_date);
 }
 
-void read_items_collections(ifstream &filein, vector<customer> &list_customer) {
+void read_items_collection_of_customer(ifstream &filein, vector<customer> &list_customer) {
     while (!filein.eof()) {
         Customer cs;
-        read_customer_data(filein, cs);
+        get_information_customer(filein, cs);
         for (int i = 0; i < cs.total_item; i++) {
             Item its;
-            read_items_data(filein, its);
+            get_information_items_in_customer(filein, its);
             cs.item_collection.push_back(its);
         }
         list_customer.push_back(cs);
     }
 }
 
-void printf_customer(const Customer& cs) {
+void printf_customer(const Customer &cs) {
     cout << "List Customer";
     cout << "\nCustomer id: " << cs.cid;
     cout << "\nCustomer name: " << cs.name;
@@ -62,13 +62,13 @@ void printf_customer(const Customer& cs) {
     cout << "====================================" << endl;
 }
 
-void printf_items_data(const Item& its) {
+void printf_items_data(const Item &its) {
     cout << "items id: " << its.i_id << "-" << its.i_date << endl;
     cout << "====================================" << endl;
 }
 
 
-void read_customer_data(ofstream &outfile, Customer &cs) {
+void add_customer_data(ofstream &outfile, Customer &cs) {
     cout << "\nEnter customer id: ";
     getline(cin, cs.cid);
     cout << "\nEnter customer name: ";
@@ -87,7 +87,7 @@ void read_customer_data(ofstream &outfile, Customer &cs) {
 }
 
 
-void read_items_data(ofstream &outfile, Item &it) {
+void add_items_data(ofstream &outfile, Item &it) {
     cout << "Enter hint items: \n";
     getline(cin, it.i_id);
     cout << "Enter hint items date: \n";
@@ -97,20 +97,20 @@ void read_items_data(ofstream &outfile, Item &it) {
 
 void read_items_collections(ofstream &outfile, vector<customer> &list_customer) {
     Customer cs;
-    read_customer_data(outfile, cs);
+    add_customer_data(outfile, cs);
     if (cs.total_item > 0) {
         for (int i = 0; i < cs.total_item; i++) {
             Item its;
-            read_items_data(outfile, its);
+            add_items_data(outfile, its);
         }
     }
     outfile.close();
 }
 
-void printf(const vector<Customer>& cs) {
-    for (auto & c : cs) {
+void printf(const vector<Customer> &cs) {
+    for (auto &c: cs) {
         printf_customer(c);
-        for (auto & j : c.item_collection) {
+        for (auto &j: c.item_collection) {
             printf_items_data(j);
         }
     }
@@ -125,7 +125,7 @@ int main() {
     ifstream filein;
     filein.open(customer, ios_base::in);
     vector<Customer> customer_collection;
-    read_items_collections(filein, customer_collection);
+    read_items_collection_of_customer(filein, customer_collection);
     printf(customer_collection);
 
 
