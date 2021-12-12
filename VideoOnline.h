@@ -12,9 +12,9 @@ using namespace std;
 
 class VideoOnline {
 public:
-    static void get_data_collection(LinkedListItems list_items, LinkedList list,ifstream &inFile);
     static void read_data_customer(ifstream &filein, Customer &cs);
     static void read_data_items(ifstream &filein, Items_structer &it);
+    static void insert_data_file(ifstream &inFile, LinkedList * list_customer, LinkedListItems * list_its);
 };
 
 

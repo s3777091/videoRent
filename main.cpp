@@ -6,18 +6,17 @@ using namespace std;
 
 int main() {
 
-    string file = "C:\\Users\\Asus\\Desktop\\videoRent\\Data\\customers.txt";
+    string file = R"(C:\Users\Asus\Desktop\videoRent\Data\customers.txt)";
     ifstream inFile(file);
     // Create a linked list
-    LinkedList list{};
-    CreateList(list);
+    LinkedList list_customer{};
+    LinkedListItems list_Items{};
 
-    LinkedListItems lists{};
-    CreateList_items(lists);
+    VideoOnline::insert_data_file(inFile, &list_customer, &list_Items);
 
-    VideoOnline::get_data_collection(lists, list, inFile);
+    PrintList(list_customer);
 
+    PrintList_items(list_Items);
     inFile.close();
-
     return 0;
 }
