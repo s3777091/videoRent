@@ -38,3 +38,53 @@ void VideoOnline::insert_data_file(ifstream &inFile, Node_customer *node, Linked
         *cus_list = list_customer;
     }
 }
+
+void VideoOnline::Search_customer(LinkedList &list, Node_customer *node) {
+    string number;
+    cout << "Enter Customer id: " << endl;
+    getline(cin, number);
+    Search_Customer(list, node, number);
+}
+
+void VideoOnline::Promote_Customer(LinkedList &list, Node_customer *node){
+    string number;
+    cout << "Enter Customer id to promote: " << endl;
+    getline(cin, number);
+    promote(list, node, number);
+    cout << "Sucess promote customer id: " << number << endl;
+}
+
+void VideoOnline::Update_customer_information(LinkedList &list, Node_customer *node, string file) {
+    ofstream fileout(file);
+    string number;
+    cout << "Enter Customer id want to update: " << endl;
+    getline(cin, number);
+    Update_Customer_node(list, node, number);
+    save_file_data(list,fileout);
+    cout << "Customer at " << number << " Have been save for new Update" << endl;
+    fileout.close();
+}
+
+void VideoOnline::save_file_data(LinkedList &list, ofstream &fileout) {
+    if (fileout.is_open()) {
+        if (list.head != nullptr) {
+            Node_customer *node = list.head;
+            while (node != nullptr) {
+                fileout << node->customer_id << ',';
+                fileout << node->customer_name << ',';
+                fileout << node->customer_address << ',';
+                fileout << node->customer_phone << ',';
+                fileout << node->customer_hint_item << ',';
+                fileout << node->customer_type << '\n';
+                for (auto &j: node->customer_item_collection) {
+                    add_items(fileout, j);
+                }
+                node = node->next;
+            }
+        }
+    } else {
+        cout << "Can't Open file" << endl;
+    }
+}
+
+

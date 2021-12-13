@@ -2,6 +2,10 @@
 #define LinkedList_hpp
 using namespace std;
 #include<vector>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <fstream>
 
 typedef struct items {
     string i_id;
@@ -46,5 +50,11 @@ void AddTail(LinkedList &l, Node_customer *node);
 void PrintList(LinkedList l);
 
 void printf_items_data(Items_str &its);
+
+void add_items(ofstream &fileout, Items_str &its);
+
+Node_customer *Search_Customer(LinkedList list, Node_customer *node, const string& customer_id);
+Node_customer *promote(LinkedList l, Node_customer *node,const string& number_id);
+Node_customer *Update_Customer_node(LinkedList &l, Node_customer *node, const string& customer_id);
 
 #endif
