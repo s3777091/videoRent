@@ -17,13 +17,14 @@ void VideoOnline::read_data_items(ifstream &filein, Items_str &it) {
     getline(filein, it.i_date);
 }
 
-
-void VideoOnline::insert_data_file(ifstream &inFile, Node_customer *node, LinkedList *cus_list) {
+void VideoOnline::insert_data_file(
+        ifstream &inFile, LinkedList *cus_list, vector<customer> &cus_list_vector) {
     if (!inFile) {
         cout << "can't open file'" << endl;
     } else {
         LinkedList list_customer{};
         CreateList(list_customer);
+        Node_customer *node;
         while (!inFile.eof()) {
             Customer cs;
             read_data_customer(inFile, cs);
@@ -34,33 +35,34 @@ void VideoOnline::insert_data_file(ifstream &inFile, Node_customer *node, Linked
             }
             node = CreateNode(cs);
             AddTail(list_customer, node);
+            cus_list_vector.push_back(cs);
         }
         *cus_list = list_customer;
     }
 }
 
-void VideoOnline::Search_customer(LinkedList &list, Node_customer *node) {
+void VideoOnline::Search_customer(LinkedList &list) {
     string number;
     cout << "Enter Customer id: " << endl;
     getline(cin, number);
-    Search_Customer(list, node, number);
+    Search_Customer(list, number);
 }
 
-void VideoOnline::Promote_Customer(LinkedList &list, Node_customer *node){
+void VideoOnline::Promote_Customer(LinkedList &list) {
     string number;
     cout << "Enter Customer id to promote: " << endl;
     getline(cin, number);
-    promote(list, node, number);
+    promote(list, number);
     cout << "Sucess promote customer id: " << number << endl;
 }
 
-void VideoOnline::Update_customer_information(LinkedList &list, Node_customer *node, string file) {
+void VideoOnline::Update_customer_information(LinkedList &list, const string &file) {
     ofstream fileout(file);
     string number;
     cout << "Enter Customer id want to update: " << endl;
     getline(cin, number);
-    Update_Customer_node(list, node, number);
-    save_file_data(list,fileout);
+    Update_Customer_node(list, number);
+    save_file_data(list, fileout);
     cout << "Customer at " << number << " Have been save for new Update" << endl;
     fileout.close();
 }
@@ -87,4 +89,9 @@ void VideoOnline::save_file_data(LinkedList &list, ofstream &fileout) {
     }
 }
 
-
+void VideoOnline::Display_customer_in_type(const vector<customer> &ts) {
+    string type;
+    cout << "Enter the type of Customer to display: " << endl;
+    cin >> type;
+    display_customer_type(ts, type);
+}

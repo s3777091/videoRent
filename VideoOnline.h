@@ -14,16 +14,17 @@ public:
 
     static void read_data_items(ifstream &filein, Items_str &it);
 
-    static void insert_data_file(ifstream &inFile, Node_customer *node, LinkedList *list_customer);
+    static void insert_data_file(ifstream &inFile, LinkedList *list_customer,vector<customer> &list_vector);
 
-    static void Search_customer(LinkedList &list, Node_customer *node);
+    static void Search_customer(LinkedList &list);
 
-    static void Update_customer_information(LinkedList &list, Node_customer *node, string file);
+    static void Update_customer_information(LinkedList &list, const string& file);
 
     static void save_file_data(LinkedList &list, ofstream &fileout);
 
-    static void Promote_Customer(LinkedList &list, Node_customer *node);
-};
+    static void Promote_Customer(LinkedList &list);
 
+    static void Display_customer_in_type(const vector<customer>& ts);
+};
 
 #endif

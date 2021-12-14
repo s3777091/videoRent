@@ -7,9 +7,9 @@ int main() {
     string file = R"(C:\Users\Asus\Desktop\School\videoRent\Data\customers.txt)";
     ifstream inFile(file);
     LinkedList list_customer{};
-    auto *node = new Node_customer;
-    VideoOnline::insert_data_file(inFile, node, &list_customer);
-    VideoOnline::Search_customer(list_customer, node);
+    vector<customer> vst;
+    VideoOnline::insert_data_file(inFile, &list_customer, vst);
+    VideoOnline::Display_customer_in_type(vst);
     inFile.close();
     return 0;
 }
