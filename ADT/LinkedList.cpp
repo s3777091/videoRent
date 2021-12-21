@@ -17,6 +17,19 @@ CreateNode(Customer &cs) {
     return node;
 }
 
+Node_items_collection * createNode_items(Items_Collection &itc){
+    auto * node = new Node_items_collection;
+    node->node_itc_id = itc.itc_id;
+    node->node_itc_name = itc.itc_name;
+    node->node_itc_types = itc.itc_types;
+    node->node_itc_loans_types = itc.itc_loans_types;
+    node->node_itc_copies = itc.itc_copies;
+    node->node_itc_fees = itc.itc_fees;
+    node->node_itc_genre = itc.itc_genre;
+    node->next = nullptr;
+    return node;
+}
+
 void CreateList(LinkedList &l) {
     l.head = nullptr;
     l.tail = nullptr;

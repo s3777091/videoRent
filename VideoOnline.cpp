@@ -17,6 +17,45 @@ void VideoOnline::read_data_items(ifstream &filein, Items_str &it) {
     getline(filein, it.i_date);
 }
 
+void VideoOnline::read_items_collection(ifstream &filein, Items_Collection &itc){
+    getline(filein, itc.itc_id, ',');
+    getline(filein, itc.itc_name, ',');
+    getline(filein, itc.itc_types, ',');
+    getline(filein, itc.itc_loans_types, ',');
+    getline(filein, itc.itc_copies, ',');
+    getline(filein, itc.itc_fees, ',');
+    getline(filein, itc.itc_genre);
+}
+
+void VideoOnline::insert_data_file_items(ifstream &inFile, vector<items_collection> &list_items){
+    if (!inFile) {
+        cout << "can't open file'" << endl;
+    } else {
+        while (!inFile.eof()) {
+            Items_Collection itc;
+            read_items_collection(inFile, itc);
+            list_items.push_back(itc);
+        }
+    }
+}
+
+void VideoOnline::display(Items_Collection  &itc){
+    cout << itc.itc_id << ' ';
+    cout << itc.itc_name << ' ';
+    cout << itc.itc_types << ' ';
+    cout << itc.itc_loans_types << ' ';
+    cout << itc.itc_copies << ' ';
+    cout << itc.itc_fees << ' ';
+    cout << itc.itc_genre << endl;
+}
+
+void VideoOnline::printf(const vector<Items_Collection> &its) {
+    for (Items_Collection lius: its) {
+        display(lius);
+    }
+}
+
+
 void VideoOnline::insert_data_file(
         ifstream &inFile, LinkedList *cus_list, vector<customer> &cus_list_vector) {
     if (!inFile) {
