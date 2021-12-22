@@ -19,29 +19,9 @@ private:
     int Copies;
     double Fees;
     bool Status;
+    Node* next;
 
 public:
-    Items();
-
-    //Setters
-    void setID() {ID = ID;}
-    void setTitle() {Title =Title;}
-    void setRentalType() {RentalType = RentalType;}
-    void setLoanType() {LoanType = LoanType;}
-    void setCopies() {Copies = Copies;}
-    void setFees () {Fees = Fees;}
-    void setStatus() {Status = Status;}
-
-    //Getters
-    string getID() {return this->ID;}
-    string getTitle() {return this->Title;}
-    string getRentalType() {return this->RentalType;}
-    string getLoanType() {return this->LoanType;}
-    int getCopies() {return this->Copies;}
-    double getFees() {return this->Fees;}
-    bool getStatus() {return this->Status;}
-
-    ~Items();
 };
 
 #endif //MAIN_CPP_ITEMS_H
