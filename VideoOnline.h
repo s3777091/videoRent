@@ -25,6 +25,14 @@ public:
     static void Promote_Customer(LinkedList &list);
 
     static void Display_customer_in_type(const vector<customer>& ts);
+
+    static void read_items_collection(ifstream &filein, Items_Collection &itc);
+
+    static void display(Items_Collection &itc);
+
+    static void insert_data_file_items(ifstream &inFile, vector<items_collection> &list_items);
+
+    static void printf(const vector<Items_Collection> &its);
 };
 
 #endif

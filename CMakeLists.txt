@@ -3,4 +3,4 @@ project(videoRent)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(videoRent main.cpp ADT/LinkedList.cpp ADT/LinkedList.h VideoOnline.cpp VideoOnline.h Items.h)
+add_executable(videoRent main.cpp ADT/LinkedList.cpp ADT/LinkedList.h VideoOnline.cpp VideoOnline.h)
