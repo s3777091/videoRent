@@ -1,41 +1,19 @@
 #include "LinkedList.h"
-#pragma warning(disable:4996)
-
 using namespace std;
 
 Node_customer *
-CreateNode(Customer &cs) {
-    auto *node = new Node_customer;
-    node->customer_id = cs.cid;
-    node->customer_name = cs.name;
-    node->customer_address = cs.address;
-    node->customer_phone = cs.phone;
-    node->customer_type = cs.type;
-    node->customer_hint_item = cs.hint_item;
-    node->customer_item_collection = cs.item_collection;
+LinkedList::CreateNode(Customer &cs) {
+    auto *node = new Node_customer(cs);
     node->next = nullptr;
     return node;
 }
 
-Node_items_collection * createNode_items(Items_Collection &itc){
-    auto * node = new Node_items_collection;
-    node->node_itc_id = itc.itc_id;
-    node->node_itc_name = itc.itc_name;
-    node->node_itc_types = itc.itc_types;
-    node->node_itc_loans_types = itc.itc_loans_types;
-    node->node_itc_copies = itc.itc_copies;
-    node->node_itc_fees = itc.itc_fees;
-    node->node_itc_genre = itc.itc_genre;
-    node->next = nullptr;
-    return node;
-}
-
-void CreateList(LinkedList &l) {
+void LinkedList::CreateList(LinkedList &l) {
     l.head = nullptr;
     l.tail = nullptr;
 }
 
-void AddTail(LinkedList &l, Node_customer *node) {
+void LinkedList::AddTail(LinkedList &l, Node_customer *node) {
     if (l.head == nullptr) {
         l.head = node;
         l.tail = node;
@@ -45,44 +23,46 @@ void AddTail(LinkedList &l, Node_customer *node) {
     }
 }
 
-void printf_items_data(Items_str &its) {
+void LinkedList::printf_items_data(Items_str &its) {
     cout << "items id: " << its.i_id << "-" << its.i_date << endl;
     cout << "====================================" << endl;
 }
 
-void PrintList(LinkedList l) {
+void LinkedList::showNode(Node_customer *node) {
+    cout << node->customer_id << ' ';
+    cout << node->customer_name << ' ';
+    cout << node->customer_address << ' ';
+    cout << node->customer_phone << ' ';
+    cout << node->customer_hint_item << ' ';
+    cout << node->customer_type << '\n';
+    for (auto &j: node->customer_item_collection) {
+        LinkedList::printf_items_data(j);
+    }
+}
+
+void LinkedList::PrintList(LinkedList l) {
     if (l.head != nullptr) {
         Node_customer *node = l.head;
         while (node != nullptr) {
-            cout << node->customer_id << ' ';
-            cout << node->customer_name << ' ';
-            cout << node->customer_address << ' ';
-            cout << node->customer_phone << ' ';
-            cout << node->customer_hint_item << ' ';
-            cout << node->customer_type << '\n';
-            for (auto &j: node->customer_item_collection) {
-                printf_items_data(j);
-            }
+            LinkedList::showNode(node);
             node = node->next;
         }
     }
 }
 
-void add_items(ofstream &fileout, Items_str &its) {
+void LinkedList::add_items(ofstream &fileout, Items_str &its) {
     fileout << its.i_id << '-' << its.i_date << "\n";
 }
 
-
 int to_int(const string &number_id) {
     string string_number = number_id.substr(1, 4);
-
     stringstream exchange_number(string_number);
     int x = 0;
     exchange_number >> x;
     return x;
 }
 
-Node_customer *Search_Customer(LinkedList l, const string &number_id) {
+Node_customer *LinkedList::Search_Customer(LinkedList l, const string &number_id) {
     Node_customer *new_node;
     new_node = l.head;
     int i = 0;
@@ -92,21 +72,13 @@ Node_customer *Search_Customer(LinkedList l, const string &number_id) {
         i++;
     }
     if (i == number && new_node != nullptr) {
-        cout << new_node->customer_id << ' ';
-        cout << new_node->customer_name << ' ';
-        cout << new_node->customer_address << ' ';
-        cout << new_node->customer_phone << ' ';
-        cout << new_node->customer_hint_item << ' ';
-        cout << new_node->customer_type << '\n';
-        for (auto &j: new_node->customer_item_collection) {
-            printf_items_data(j);
-        }
+        LinkedList::showNode(new_node);
     }
     return nullptr;
 }
 
 
-Node_customer *promote(LinkedList l, const string &number_id) {
+Node_customer *LinkedList::promote(LinkedList l, const string &number_id) {
     Node_customer *new_node;
     new_node = l.head;
     int i = 0;
@@ -129,17 +101,8 @@ Node_customer *promote(LinkedList l, const string &number_id) {
     return nullptr;
 }
 
-int Length(LinkedList l) {
-    int count = 0;
-    Node_customer *node = l.head;
-    while (node != nullptr) {
-        count++;
-        node = node->next;
-    }
-    return count;
-}
 
-Node_customer *Update_Customer_node(LinkedList &l, const string &number_id) {
+Node_customer *LinkedList::Update_Customer_node(LinkedList &l, const string &number_id) {
     Node_customer *new_node;
     new_node = l.head;
     int i = 0;
@@ -166,7 +129,7 @@ Node_customer *Update_Customer_node(LinkedList &l, const string &number_id) {
 }
 
 
-void display_customer_type(const vector<customer>& cus_list, const string& type) {
+void LinkedList::display_customer_type(const vector<Customer> &cus_list, const string &type) {
     for (auto &cus: cus_list) {
         if (stricmp(cus.type.c_str(), type.c_str()) == 0) {
             cout << cus.cid << ' ';
@@ -174,7 +137,7 @@ void display_customer_type(const vector<customer>& cus_list, const string& type)
             cout << cus.phone << ' ';
             cout << cus.address << ' ';
             cout << cus.hint_item << '\n';
-            for (const Items_str& list_items: cus.item_collection) {
+            for (const Items_str &list_items: cus.item_collection) {
                 cout << list_items.i_id << '-' << list_items.i_date << endl;
                 cout << "====================================" << endl;
             }

@@ -15,17 +15,8 @@ typedef struct items {
     string i_date;
 } Items_str;
 
-typedef struct items_collection {
-    string itc_id;
-    string itc_name;
-    string itc_types;
-    string itc_loans_types;
-    string itc_copies;
-    string itc_fees;
-    string itc_genre;
-} Items_Collection;
-
-typedef struct customer {
+class Customer {
+public:
     string cid;
     string name;
     string address;
@@ -34,9 +25,10 @@ typedef struct customer {
     string type;
     int total_item{};
     vector<items> item_collection;
-} Customer;
+};
 
-struct Node_customer {
+class Node_customer {
+public:
     string customer_id;
     string customer_name;
     string customer_address;
@@ -44,51 +36,46 @@ struct Node_customer {
     string customer_hint_item;
     string customer_type;
     vector<items> customer_item_collection;
-    Node_customer *next;
+    Node_customer *next{};
+
+    explicit Node_customer(Customer &cs) {
+        this->customer_id = cs.cid;
+        this->customer_name = cs.name;
+        this->customer_address = cs.address;
+        this->customer_phone = cs.phone;
+        this->customer_hint_item = cs.hint_item;
+        this->customer_type = cs.type;
+        this->customer_item_collection = cs.item_collection;
+    }
 };
 
-struct Node_items_collection {
-    string node_itc_id;
-    string node_itc_name;
-    string node_itc_types;
-    string node_itc_loans_types;
-    string node_itc_copies;
-    string node_itc_fees;
-    string node_itc_genre;
-    Node_items_collection * next;
-};
+class LinkedList {
+public:
+    static Node_customer *CreateNode(Customer &cs);
 
-struct LinkedList_Items_collection {
-    Node_items_collection *head_items;
-    Node_items_collection *tail_items;
-};
-struct LinkedList {
+    static void CreateList(LinkedList &l);
+
+    static void AddTail(LinkedList &l, Node_customer *node);
+
+    static void PrintList(LinkedList l);
+
+    static void printf_items_data(Items_str &its);
+
+    static void add_items(ofstream &fileout, Items_str &its);
+
+    static Node_customer *Search_Customer(LinkedList list, const string &customer_id);
+
+    static Node_customer *promote(LinkedList l, const string &number_id);
+
+    static Node_customer *Update_Customer_node(LinkedList &l, const string &customer_id);
+
+    static void display_customer_type(const vector<Customer> &ts, const string &type);
+
+    static void showNode(Node_customer *node);
+
     Node_customer *head;
     Node_customer *tail;
 };
 
-Node_customer *CreateNode(Customer &cs);
-
-void CreateList(LinkedList &l);
-
-void AddTail(LinkedList &l, Node_customer *node);
-
-void PrintList(LinkedList l);
-
-void printf_items_data(Items_str &its);
-
-int Length(LinkedList l);
-
-void add_items(ofstream &fileout, Items_str &its);
-
-Node_customer *Search_Customer(LinkedList list, const string &customer_id);
-
-Node_customer *promote(LinkedList l, const string &number_id);
-
-Node_customer *Update_Customer_node(LinkedList &l, const string &customer_id);
-
-void display_customer_type(const vector<customer> &ts, const string &type);
-
-Node_items_collection * createNode_items(Items_Collection &itc);
 
 #endif
