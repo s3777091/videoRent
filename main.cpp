@@ -14,6 +14,42 @@ int main() {
 
     string items_file = R"(C:\Users\Asus\Desktop\School\videoRent\Data\items.txt)";
     ifstream openFile(items_file);
+    char input;
+    cout << "Welcome to Genie's video store!" << endl;
+    cout << "How can we help you? Please input an option." << endl;
+    cout << "1. I'd like to add new item, update or delete an existing item" << endl;
+    cout << "2. I'd like to add new customer or update an existing customer" << endl;
+    cout << "3. I'd like to promote an existing customer" << endl;
+    cout << "4. I'd like to rent an item" << endl;
+    cout << "5. I'd like to return an item" << endl;
+    cout << "6. I'd like to display all items" << endl;
+    cout << "7. I'd like to display out-of-stock item" << endl;
+    cout << "8. I'd like to display all customers" << endl;
+    cout << "9. I'd like to display group of customers" << endl;
+    cout << "10. I'd like to search items or customers" << endl;
+    cout << "Please type 'Exit' whenever to end the program" << endl;
+    cin >> input;
+
+    switch (input){
+        case 1: {
+            cout << "Would you like to: " << endl;
+            cout << "1. Add a new item?" << endl;
+            cout << "2. Update an existing item?" << endl;
+            cout << "3. Delete an existing item?" << endl;
+        }
+        case 2: {
+            cout << "Would you like to: " << endl;
+            cout << "1. Add a new customer?" << endl;
+            cout << "2. Update an existing customer?" << endl;
+        }
+        case 10: {
+            cout << "Would you like to: " << endl;
+            cout << "1. Search for items?" << endl;
+            cout << "2. Search for customers?" << endl;
+        }
+    }
+
+
 
     ItemsList items{};
     CustomerItems::insert_file_items(openFile, &items);
