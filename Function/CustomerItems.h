@@ -16,7 +16,8 @@ class CustomerItems {
 public:
     static void read_items_collection(ifstream &filein, items_collection &itc);
     static void insert_file_items(ifstream &inFile, ItemsList *list);
-
+    static void search_items_id(ItemsList& list);
+    //static void search_items_title(ItemsList& list);
 };
 
 

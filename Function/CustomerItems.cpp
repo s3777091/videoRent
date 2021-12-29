@@ -32,3 +32,18 @@ void CustomerItems::insert_file_items(ifstream &inFile, ItemsList *list) {
         *list = list_items;
     }
 }
+
+void CustomerItems::search_items_id(ItemsList& list) {
+    string number;
+    cout << "Enter item ID: " << endl;
+    getline(cin, number);
+    ItemsList::SearchItem(list, number);
+}
+
+/*void CustomerItems::search_items_title(ItemsList& list) {
+    string title;
+    cout << "Enter item title: " << endl;
+    getline(cin, title);
+    Itemslist:SearchItem
+}*/
+
