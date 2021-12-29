@@ -29,7 +29,7 @@ public:
     string node_itc_copies;
     string node_itc_fees;
     string node_itc_genre;
-    Node_items_collection *next{};
+    Node_items_collection *next;
 
     explicit Node_items_collection(items_collection &it) {
         this->node_itc_id = it.itc_id;
@@ -57,7 +57,13 @@ public:
 
     static void showList(Node_items_collection *node);
 
+    static int to_int(const string& item_id);
+
+    static void showNode(Node_items_collection *node);
+
     static void PrintListItems(ItemsList l);
+
+    static Node_items_collection *SearchItem(ItemsList list, const string& item_id);
 };
 
 
