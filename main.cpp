@@ -1,20 +1,21 @@
 #include <iostream>
+#include <string>
 #include "Function/VideoCustomer.h"
 #include "Function/CustomerItems.h"
 
 using namespace std;
 
 int main() {
-    string customer = R"(C:\Users\Asus\Desktop\School\videoRent\Data\customers.txt)";
+    //string customer = R"(C:\Users\Aisaka\Desktop\Working\RMIT\2021c\Software Engineering Design\videoRent\Data\customers.txt)";
 //    ifstream inFile(customer);
 //    LinkedList list_customer{};
 //    vector<Customer> vst;
 //    VideoCustomer::insert_data_file(inFile, &list_customer, vst);
 //    VideoCustomer::Display_customer_in_type(vst);
 
-    string items_file = R"(C:\Users\Asus\Desktop\School\videoRent\Data\items.txt)";
-    ifstream openFile(items_file);
-    char input;
+    //string items_file = R"(C:\Users\Aisaka\Desktop\Working\RMIT\2021c\Software Engineering Design\videoRent\Data\items.txt)";
+    //ifstream openFile(items_file);
+    int input;
     cout << "Welcome to Genie's video store!" << endl;
     cout << "How can we help you? Please input an option." << endl;
     cout << "1. I'd like to add new item, update or delete an existing item" << endl;
@@ -28,34 +29,62 @@ int main() {
     cout << "9. I'd like to display group of customers" << endl;
     cout << "10. I'd like to search items or customers" << endl;
     cout << "Please type 'Exit' whenever to end the program" << endl;
+    cout << "Please input an option: ";
     cin >> input;
 
-    switch (input){
-        case 1: {
-            cout << "Would you like to: " << endl;
-            cout << "1. Add a new item?" << endl;
-            cout << "2. Update an existing item?" << endl;
-            cout << "3. Delete an existing item?" << endl;
+    while (input < 1 || input > 10) {
+        cerr << "The option is invalid. Please re-input an option: ";
+        cin >> input;
+    }
+
+    while (input != 'Exit') {
+        if (input == 1) {
+                cout << "Would you like to: " << endl;
+                cout << "1. Add a new item?" << endl;
+                cout << "2. Update an existing item?" << endl;
+                cout << "3. Delete an existing item?" << endl;
+                cout << "Please input an option: ";
+                cin >> input;
+                while (input < 1 || input > 3) {
+                    cerr << "The option is invalid. Please re-input an option: ";
+                    cin >> input;
+                }
         }
-        case 2: {
-            cout << "Would you like to: " << endl;
-            cout << "1. Add a new customer?" << endl;
-            cout << "2. Update an existing customer?" << endl;
+        else if (input == 2){
+                cout << "Would you like to: " << endl;
+                cout << "1. Add a new customer?" << endl;
+                cout << "2. Update an existing customer?" << endl;
+                cout << "Please input an option: ";
+                cin >> input;
+                while (input < 1 || input > 3) {
+                    cerr << "The option is invalid. Please re-input an option: ";
+                    cin >> input;
+                }
         }
-        case 10: {
-            cout << "Would you like to: " << endl;
-            cout << "1. Search for items?" << endl;
-            cout << "2. Search for customers?" << endl;
+        else if (input == 10) {
+                cout << "Would you like to: " << endl;
+                cout << "1. Search for items?" << endl;
+                cout << "2. Search for customers?" << endl;
+                cout << "Please input an option: ";
+                cin >> input;
+                    while (input < 1 || input > 3) {
+                    cerr << "The option is invalid. Please re-input an option: ";
+                    cin >> input;
+                }
         }
     }
 
 
 
-    ItemsList items{};
-    CustomerItems::insert_file_items(openFile, &items);
-    ItemsList::PrintListItems(items);
 
 
-    openFile.close();
+
+
+    //ItemsList items{};
+    //CustomerItems::insert_file_items(openFile, &items);
+    //ItemsList::PrintListItems(items);
+
+
+    //openFile.close();
     return 0;
 }
