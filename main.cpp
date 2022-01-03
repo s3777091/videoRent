@@ -11,12 +11,14 @@ static CustomerList list_customer{};
 static vector<Customer> vst;
 static ItemList items{};
 
+//Function for checking and/or alternating items
 static void itemsCheck() {
     int input;
     bool quit = false;
-    do {
+    do {   
+        //Sub-menu for item checking
         cout << "1. Add a new items?" << endl;
-        cout << "2. Update an existing customer?" << endl;
+        cout << "2. Update an existing item?" << endl;
         cout << "3. Remove an items? " << endl;
         cout << "4. Quit" << endl;
         cout << "Please input an option: ";
@@ -41,10 +43,12 @@ static void itemsCheck() {
 }
 
 
+//Function for checking and/or alternating customers
 static void customer_check() {
     int input;
     bool quit = false;
-    do {
+    do {        
+        //Sub-menu for customer checking
         cout << "1. Add a new customer?" << endl;
         cout << "2. Update an existing customer?" << endl;
         cout << "3. Quit" << endl;
@@ -67,10 +71,13 @@ static void customer_check() {
     } while (!quit);
 }
 
+
+//Function for searching either Items or Customers
 static void search() {
     int input;
     bool quit = false;
-    do {
+    do {       
+        //Sub-menu for searching
         cout << "1. Search Items? " << endl;
         cout << "2. Search Customer?" << endl;
         cout << "3. Quit" << endl;
@@ -103,9 +110,11 @@ int main() {
     ifstream inFileItems(items_file);
     do {
         VideoRent::connect_data(inFileCustomer, inFileItems, &list_customer, vst, &items);
+        
+        //Main menu
         cout << "====================================" << endl;
         cout << "Welcome to Genie's video store!" << endl;
-        cout << "How can we help you? Please input an option." << endl;
+        cout << "How can we help you?" << endl;
         cout << "1. I'd like to add new item, update or delete an existing item" << endl;
         cout << "2. I'd like to add new customer or update an existing customer" << endl;
         cout << "3. I'd like to promote an existing customer" << endl;
@@ -120,6 +129,8 @@ int main() {
         cout << "Please input an option: ";
         cin >> choose;
         cout << "====================================" << endl;
+        
+        //Using Switch to be compatible with user's choice
         switch (choose) {
             case 1:
                 itemsCheck();
@@ -143,7 +154,11 @@ int main() {
                 search();
                 break;
             case 11:
-                cout << "S3777091 - HUYNH DAC TAN DAT " << endl;
+                cout << "Thank you for using this service !" << endl;
+                cout << "This was originally developed by: GROUP 05\n"
+                     << "s3777091 - DAT HUYNH\n"
+                     << "s3845565 - SON DO\n"
+                     << "s3915177 - DUC TRINH" << endl;
                 quit = true;
                 break;
             default:
