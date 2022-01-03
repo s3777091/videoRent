@@ -23,6 +23,13 @@ static void itemsCheck() {
         cout << "4. Quit" << endl;
         cout << "Please input an option: ";
         cin >> input;
+        
+        //Catching wrong input from user
+        while (input < 1 || input > 4) {
+            cerr << "The option is invalid. Please re-input an option: ";
+            cin >> input;
+        }
+        
         switch (input) {
             case 1:
                 ItmFunc::AddNewItems(items, items_file);
@@ -35,9 +42,9 @@ static void itemsCheck() {
             case 4:
                 quit = true;
                 break;
-            default:
+            /*default:
                 cout << "invalid selection" << endl;
-                break;
+                break;*/
         }
     } while (!quit);
 }
@@ -54,6 +61,10 @@ static void customer_check() {
         cout << "3. Quit" << endl;
         cout << "Please input an option: ";
         cin >> input;
+        while (input < 1 || input > 3) {
+            cerr << "The option is invalid. Please re-input an option: ";
+            cin >> input;
+        }
         switch (input) {
             case 1:
                 CusFunc::AddNewCustomer(list_customer, customer);
@@ -64,9 +75,9 @@ static void customer_check() {
             case 3:
                 quit = true;
                 break;
-            default:
+            /*default:
                 cout << "invalid selection" << endl;
-                break;
+                break;*/
         }
     } while (!quit);
 }
@@ -83,6 +94,10 @@ static void search() {
         cout << "3. Quit" << endl;
         cout << "Please input an option: ";
         cin >> input;
+        while (input < 1 || input > 3) {
+            cerr << "The option is invalid. Please re-input an option: ";
+            cin >> input;
+        }
         switch (input) {
             case 1:
                 cout << "Dont have" << endl;
@@ -93,9 +108,9 @@ static void search() {
             case 3:
                 quit = true;
                 break;
-            default:
+            /*default:
                 cout << "invalid selection" << endl;
-                break;
+                break;*/
         }
     } while (!quit);
 
@@ -128,6 +143,10 @@ int main() {
         cout << "11. Please type 'Exit' whenever to end the program" << endl;
         cout << "Please input an option: ";
         cin >> choose;
+        while (choose < 1 || choose > 12) {
+            cerr << "The option is invalid. Please re-input an option: ";
+            cin >> choose;
+        }
         cout << "====================================" << endl;
         
         //Using Switch to be compatible with user's choice
@@ -161,9 +180,10 @@ int main() {
                      << "s3915177 - DUC TRINH" << endl;
                 quit = true;
                 break;
-            default:
+            
+            /*default:
                 cout << "invalid selection" << endl;
-                break;
+                break; */
         }
     } while (!quit);
     inFileCustomer.close();
