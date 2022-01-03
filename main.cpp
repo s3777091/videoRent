@@ -61,6 +61,7 @@ static void customer_check() {
         cout << "3. Quit" << endl;
         cout << "Please input an option: ";
         cin >> input;
+        //Catching wrong input from user
         while (input < 1 || input > 3) {
             cerr << "The option is invalid. Please re-input an option: ";
             cin >> input;
@@ -94,6 +95,7 @@ static void search() {
         cout << "3. Quit" << endl;
         cout << "Please input an option: ";
         cin >> input;
+        //Catching wrong input from user
         while (input < 1 || input > 3) {
             cerr << "The option is invalid. Please re-input an option: ";
             cin >> input;
@@ -143,6 +145,7 @@ int main() {
         cout << "11. Please type 'Exit' whenever to end the program" << endl;
         cout << "Please input an option: ";
         cin >> choose;
+        //Catching wrong input from user
         while (choose < 1 || choose > 12) {
             cerr << "The option is invalid. Please re-input an option: ";
             cin >> choose;
